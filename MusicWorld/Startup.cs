@@ -14,16 +14,22 @@ namespace MusicWorld
 {
     public class Startup
     {
+        private IConfiguration _config;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _config = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<FeatureToggle>(x => new FeatureToggle()
+            {
+                DevelopersExceptions = _config.GetValue<bool>("FeatureToggles:DeveloperExceptions")
+
+            });
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -36,18 +42,15 @@ namespace MusicWorld
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,FeatureToggle features)
         {
-            if (env.IsDevelopment())
+            app.UseExceptionHandler("/Home/Error");
+
+            if (features.DevelopersExceptions)
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+          
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

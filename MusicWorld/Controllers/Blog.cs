@@ -1,22 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
 
 namespace MusicWorld.Controllers
 {
-    public class HomeController : Controller
+    [Route("blog")]
+    public class Blog : Controller
     {
-        public IActionResult Index()
+      [Route("")]
+      public IActionResult Index()
         {
             return View();
         }
-
-    
-
-        
     }
 }
