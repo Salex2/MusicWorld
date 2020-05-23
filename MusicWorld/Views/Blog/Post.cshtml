@@ -1,0 +1,23 @@
+﻿@model MusicWorld.Models.Post
+@{
+    Layout = "_Layout";
+}
+
+
+
+
+<div class="blog-size">
+
+    <h2>@Model.Title</h2>
+
+    <p>
+        Posted <span>@Model.Posted</span> by <span>@Model.Author</span>
+
+    </p>
+
+
+    <div class="blog-posts">
+        @Model.Body
+    </div>
+
+</div>
