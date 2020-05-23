@@ -1,4 +1,6 @@
-﻿@model MusicWorld.Models.Post
+﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+
+@model MusicWorld.Models.Post
 @{
     Layout = "_Layout"; 
 }
@@ -6,24 +8,28 @@
 <h2>Create your blog post</h2>
 
 <fieldset>
-    @using (Html.BeginForm())
-    {
-        @Html.ValidationSummary()
+  
+    <form asp-action="Create" asp-controller="Blog">
+    
+        <div asp-validation-summary="All" class="input-validation-error"></div>
+
         <p>
-            @Html.LabelFor(x => x.Title)
-            @Html.EditorFor(x => x.Title)
-            @Html.ValidationMessageFor(x => x.Title)
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="Blog post Title"   />
+            <span asp-validation-for="Title"></span> 
         </p>
 
         <p>
-            @Html.LabelFor(x => x.Body)
-            @Html.TextAreaFor(x => x.Body)
-            @Html.ValidationMessageFor(x => x.Body)
+           <label asp-for="Body"></label>
+           <textarea asp-for="Body" class="form-control" placeholder="Blog post content"></textarea>
+            <span asp-validation-for="Body"></span>
         </p>
 
        <p>
            <button type="submit">Create post</button>
        </p>
-    }
 
+   </form>
+    
+        
 </fieldset>
