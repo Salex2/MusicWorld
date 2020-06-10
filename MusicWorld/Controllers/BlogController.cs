@@ -8,24 +8,28 @@ using System.Threading.Tasks;
 namespace MusicWorld.Controllers
 {
     [Route("blog")]
-    public class Blog : Controller
+    public class BlogController : Controller
     {
+
+        private readonly BlogDataContext _db;
+
+        public BlogController(BlogDataContext db)
+        {
+            _db = db;
+        }
+
         [Route("")]
         public IActionResult Index()
         {
-            return View();
+            var posts = _db.Posts.OrderByDescending(x => x.Posted).Take(4).ToArray(); //Retrieves  latest 4 posts from Db  
+
+            return View(posts);
         }
 
-        [Route("{year:min(2000)}/{month:range(1,12)}")]
-        public IActionResult Post()
+        [Route("{year:min(2000)}/{month:range(1,12)}/{key}")]
+        public IActionResult Post(int year,int month,string key)
         {
-            var post = new Post
-            {
-                Title = "TITLE",
-                Body = "Body",
-                Author = "Author",
-                Posted = DateTime.Now,
-            };
+            var post = _db.Posts.FirstOrDefault(x => x.Key == key);
 
             return View(post);
         }
@@ -45,7 +49,15 @@ namespace MusicWorld.Controllers
             post.Author = User.Identity.Name;
             post.Posted = DateTime.Now;
 
-            return View();
+            _db.Posts.Add(post);
+            _db.SaveChanges();
+
+            return RedirectToAction("Post", "Blog", new //passing the Post parameters 
+            {
+                year = post.Posted.Year,
+                month = post.Posted.Month,
+                key = post.Key
+            });
         }
     }
 }
