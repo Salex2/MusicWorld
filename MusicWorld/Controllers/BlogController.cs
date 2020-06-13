@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MusicData;
 
 namespace MusicWorld.Controllers
 {
@@ -11,9 +12,9 @@ namespace MusicWorld.Controllers
     public class BlogController : Controller
     {
 
-        private readonly BlogDataContext _db;
+        private readonly MusicContext _db;
 
-        public BlogController(BlogDataContext db)
+        public BlogController(MusicContext db)
         {
             _db = db;
         }

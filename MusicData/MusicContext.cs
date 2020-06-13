@@ -1,19 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MusicWorld.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MusicWorld.Models
+namespace MusicData
 {
-    public class BlogDataContext : DbContext
+    public class MusicContext : DbContext
     {
-        public DbSet<Post> Posts { get; set; }
-
-        public BlogDataContext(DbContextOptions<BlogDataContext> options)
+   
+        public MusicContext(DbContextOptions<MusicContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
+         
+        public DbSet<Post> Posts { get; set; }
     }
 }

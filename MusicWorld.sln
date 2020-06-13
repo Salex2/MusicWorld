@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1062
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicWorld", "MusicWorld\MusicWorld.csproj", "{30941D36-499F-4365-B469-7FEC9C9627FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicWorld", "MusicWorld\MusicWorld.csproj", "{30941D36-499F-4365-B469-7FEC9C9627FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicData", "MusicData\MusicData.csproj", "{9AB81276-FA26-4395-9543-275BCE2CB041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{30941D36-499F-4365-B469-7FEC9C9627FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30941D36-499F-4365-B469-7FEC9C9627FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30941D36-499F-4365-B469-7FEC9C9627FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB81276-FA26-4395-9543-275BCE2CB041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB81276-FA26-4395-9543-275BCE2CB041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB81276-FA26-4395-9543-275BCE2CB041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB81276-FA26-4395-9543-275BCE2CB041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MusicData;
 using MusicWorld.Models;
+
 
 namespace MusicWorld
 {
@@ -42,13 +46,19 @@ namespace MusicWorld
             });
 
 
-            services.AddDbContext<BlogDataContext>(options =>
+            services.AddDbContext<MusicContext>(options =>
             {
-                var connectionString = _config.GetConnectionString("BlogDataContext");
+                var connectionString = _config.GetConnectionString("MusicContext");
 
                 options.UseSqlServer(connectionString);
 
             });
+
+            
+
+            //IdentityUser has properties like username,email etc. and a collection of user claims
+            //IdentityRole->provides authorization information like access rights
+            services.AddIdentity<IdentityUser, IdentityRole>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
