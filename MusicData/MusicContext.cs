@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MusicWorld.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicData
 {
-    public class MusicContext : DbContext
+    public class MusicContext : IdentityDbContext
     {
    
         public MusicContext(DbContextOptions<MusicContext> options)
@@ -17,5 +18,11 @@ namespace MusicData
         }
          
         public DbSet<Post> Posts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            
+        }
     }
 }

@@ -5,8 +5,8 @@
 <article class="blog-post">
     <h1>
         @Html.ActionLink(Model.Title, "Post", "Blog",
-        new { year = Model.Posted, month = Model.Posted.Month, key = Model.Key }
-)
+      new { year = Model.Posted, month = Model.Posted.Month, key = Model.Key },null)
+       
     </h1>
 
     <div class="contents">

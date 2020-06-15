@@ -1,0 +1,62 @@
+﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+
+@model MusicWorld.Models.RegisterUser
+
+@{
+    Layout = "_Layout";
+}
+
+<section class="section-form">
+    <div class="row">
+        <h2>Sign UP</h2>
+    </div>
+    <div class="row ">
+        <form asp-action="Register" asp-controller="Account" class="contact-form">
+            <div asp-validation-summary="All" class="input-validation-error"></div>
+            <div class="row">
+                <div class="latime">
+                    <label for="Email">Email</label>
+                </div>
+                <div class="col span-2-of-3">
+
+                    <input type="text" name="Email" id="Email" placeholder="Type your email">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="latime">
+                    <label for="Password">Password</label>
+                </div>
+                <div class="col span-2-of-3">
+
+                    <input type="password" name="Password" id="Password" placeholder="Type your password">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="latime">
+                    <label for="ConfirmPassword">Confirm Password</label>
+                </div>
+                <div class="col span-2-of-3">
+
+                    <input type="password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Confirm your password">
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="latime">
+                    <label>&nbsp;</label>
+                </div>
+                <div class="col span-2-of-3">
+                    <input type="submit" value="Register !">
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+</section>      

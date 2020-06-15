@@ -46,7 +46,7 @@ namespace MusicWorld
             });
 
 
-            services.AddDbContext<MusicContext>(options =>
+            services.AddDbContextPool<MusicContext>(options =>
             {
                 var connectionString = _config.GetConnectionString("MusicContext");
 
@@ -54,11 +54,13 @@ namespace MusicWorld
 
             });
 
-            
+
 
             //IdentityUser has properties like username,email etc. and a collection of user claims
             //IdentityRole->provides authorization information like access rights
-            services.AddIdentity<IdentityUser, IdentityRole>();
+            //AddEntityFrameworkStores retrieves user and roles from our Db
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<MusicContext>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -78,14 +80,18 @@ namespace MusicWorld
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                   
-            });
+            }
+              
+        );
+
+           
         }
     }
 }

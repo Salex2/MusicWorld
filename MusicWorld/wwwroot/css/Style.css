@@ -2,7 +2,7 @@
 /* BASIC SETUP*/
 /*-------------------------------------- */
 
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -52,7 +52,7 @@ header h2 {
     font-size: 24px;
     font-weight: 300;
     text-transform: uppercase;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 10px;
 }
 
@@ -181,8 +181,7 @@ input[type=submit]:active {
 
 
 .btn-full:hover,
-.btn-full:active,
-{
+.btn-full:active{
     border: 1px solid #cf6d17;
 }
 
@@ -333,6 +332,13 @@ footer p {
 /*Blog Form*/
 /*-------------------------------------- */
 
+.latime {
+    display: block;
+    float: left;
+    margin: 1% 0 1% 1.6%;
+    width: 12%;
+}
+
 .contact-form {
     width: 70%;
     margin: 0 auto;
@@ -346,9 +352,16 @@ input[type=text] {
     border: 1px solid #ffffff;
 }
 
+input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 3px;
+    border: 1px solid #ffffff;
+}
+
 
 .section-form {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 textarea {
