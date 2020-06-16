@@ -1,19 +1,12 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signedInManager;
+@{
     Layout = "_Layout";
 }
 
-@section header{
-    <a href="@Url.Action("Index","Home")">
-        <img src="img/logo.png" alt="Music logo" class="logo">
-    </a>
-    <ul class="main-nav">
-        <li> <a href=" ">Artists</a></li>
-        <li> <a href=" ">Shop</a></li>
-        <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
-        <li> <a href="@Url.Action("Register","Account")">Sign up</a></li>
-        <li> <a href=" ">Log in</a></li>
-    </ul>
-}
+
+
+
 
 <div class="hero-text-box">
     <h1>Music is the answer</h1>

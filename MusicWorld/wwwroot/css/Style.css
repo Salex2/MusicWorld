@@ -406,7 +406,21 @@ section label {
 /*-------------------------------------- */
 /*Blog page*/
 /*-------------------------------------- */
+.blogg-size p a:link,
+.blogg-size p a:visited {
+    padding: 8px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+}
 
+.blogg-size p a:hover,
+.blogg-size p a:active {
+    border-bottom: 2px solid #e67e22;
+}
 
 .blogg-size p {
     margin-top: 11px;
@@ -414,7 +428,8 @@ section label {
     margin-left: 15px;
     letter-spacing: 1px;
     font-size: 110%;
-    color:white;
+    color: white;
+    font-weight: 300;
 }
 
 .blogg-size h2 {

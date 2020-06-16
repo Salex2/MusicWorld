@@ -59,8 +59,12 @@ namespace MusicWorld
             //IdentityUser has properties like username,email etc. and a collection of user claims
             //IdentityRole->provides authorization information like access rights
             //AddEntityFrameworkStores retrieves user and roles from our Db
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<MusicContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 7;   // override de default rules for Password prop
+            }).AddEntityFrameworkStores<MusicContext>();
+
+
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

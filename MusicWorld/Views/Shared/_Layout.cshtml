@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signedInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/normalize.css">
@@ -12,67 +15,89 @@
     <header>
         <nav>
             <div class="row">
-                @if (IsSectionDefined("header"))
-                {
-                    @RenderSection("header", false)
-                }
-                else
-                {
-                    <a href="@Url.Action("Index","Home")">
-                        <img src="~/img/logo.png" alt="Music logo" class="logo">
-                    </a>
-                }
+                <a href="@Url.Action("Index","Home")">
+                    <img src="img/logo.png" alt="Music logo" class="logo">      
+                </a>
+                <ul class="main-nav">
 
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@ 
+                        <li> <a href=" ">Artists</a></li>
+                        <li> <a href=" ">Shop</a></li>
+                        <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
+                        <li>
+                            <a href="@Url.Action("Logout","Account")" title="LogOut">Logout </a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li> <a href=" ">Artists</a></li>
+                        <li> <a href=" ">Shop</a></li>
+                        <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
+                        <li><a href="@Url.Action("Register","Account")" title="Read our Blog">Register</a></li>
+                    }
+
+                </ul>
             </div>
+            
         </nav>
         @RenderBody()
     </header>
 
     <section class="section-features">
-        <div class="row">
+        @if (IsSectionDefined("header"))
+        {
+            @RenderSection("header", false)
+        }
+        else
+        {
+            <div class="row">
 
-            <h2>Get good music &amp; Get best music</h2>
-            <p class="long-copy">
-                This is a looong looasdaos fsjdvansdvsdvjadvnajdfvnadfkjvadfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
-            </p>
-        </div>
-
-        <div class="row">
-            <div class="col span-1-of-4 box">
-                <ion-icon name="heart icon-big"></ion-icon>
-                <h3>Fisrt title</h3>
-                <p>
-                    This is a looong looasdaos fsjdvansdvsdvjadnadfkjvadfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
+                <h2>Get good music &amp; Get best music</h2>
+                <p class="long-copy">
+                    Yoasdasdsaaaaaaaaaaaaaaaa a sdas dasd as dasd asdas das das dsaas 
                 </p>
             </div>
 
-            <div class="col span-1-of-4 box">
-                <ion-icon name="caret-forward-circle-outline icon-big"></ion-icon>
-                <h3>Fisrt title</h3>
-                <p>
-                    This is a looong looasdaos
+            <div class="row">
+                <div class="col span-1-of-4 box">
+                    <ion-icon name="heart icon-big"></ion-icon>
+                    <h3>Fisrt title</h3>
+                    <p>
+                        This is a looong looasdaos fsjdvansdvsdvjadnadfkjvadfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
+                    </p>
+                </div>
+
+                <div class="col span-1-of-4 box">
+                    <ion-icon name="caret-forward-circle-outline icon-big"></ion-icon>
+                    <h3>Fisrt title</h3>
+                    <p>
+                        This is a looong looasdaos
+                </div>
+
+                <div class="col span-1-of-4 box">
+                    <ion-icon name="musical-notes icon-big"></ion-icon>
+
+                    <h3>Fisrt title</h3>
+                    <p>
+                        This is a looong looasdaos fsjdvdfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
+                    </p>
+                </div>
+
+                <div class="col span-1-of-4 box">
+                    <ion-icon name="color-palette-outline icon-big"></ion-icon>
+                    <h3>Fisrt title</h3>
+                    <p>
+                        This is a looong looasdaos fsjdvansdvsdvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
+                    </p>
+                </div>
+                
             </div>
-
-            <div class="col span-1-of-4 box">
-                <ion-icon name="musical-notes icon-big"></ion-icon>
-
-                <h3>Fisrt title</h3>
-                <p>
-                    This is a looong looasdaos fsjdvdfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
-                </p>
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <ion-icon name="color-palette-outline icon-big"></ion-icon>
-                <h3>Fisrt title</h3>
-                <p>
-                    This is a looong looasdaos fsjdvansdvsdvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
-                </p>
-            </div>
-
-        </div>
-
-    </section>
+        }
+        </section>
 
     <footer>
         <div class="row">
