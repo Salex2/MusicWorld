@@ -16,14 +16,14 @@
         <nav>
             <div class="row">
                 <a href="@Url.Action("Index","Home")">
-                    <img src="img/logo.png" alt="Music logo" class="logo">      
+                    <img src="~/img/logo.png" alt="Music logo" class="logo">      
                 </a>
                 <ul class="main-nav">
 
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@ 
+                        <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@
                         <li> <a href=" ">Artists</a></li>
                         <li> <a href=" ">Shop</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
@@ -38,6 +38,7 @@
                         <li> <a href=" ">Shop</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
                         <li><a href="@Url.Action("Register","Account")" title="Read our Blog">Register</a></li>
+                        <li><a href="@Url.Action("Login","Account")" title="Login">Login</a></li>
                     }
 
                 </ul>

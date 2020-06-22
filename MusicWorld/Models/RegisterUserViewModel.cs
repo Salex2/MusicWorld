@@ -8,7 +8,7 @@ using MusicWorld.Models;
 
 namespace MusicWorld.Models
 {
-    public class RegisterUser
+    public class RegisterUserViewModel
     {
 
         [Required]

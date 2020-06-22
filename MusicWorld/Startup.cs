@@ -91,6 +91,10 @@ namespace MusicWorld
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                   name: "blog",
+                   template: "{controller=Blog}/{action=Post}/{year}/{month}/{key}");
             }
               
         );

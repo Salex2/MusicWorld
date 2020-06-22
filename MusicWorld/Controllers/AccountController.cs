@@ -36,7 +36,7 @@ namespace MusicWorld.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterUser model)
+        public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +58,39 @@ namespace MusicWorld.Controllers
                 {
                     ModelState.AddModelError("", error.Description);  //Will be displayed in Register view validation-summarry errors
                 }
+
+            }
+
+            return View(model);
+
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LogInViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
+                                         model.RememberMe, false);
+
+                if (result.Succeeded) //check if the user is created
+                {
+                    
+                    return RedirectToAction("Index", "Home");
+                }
+
+            
+                ModelState.AddModelError(string.Empty, "Invalid Login attempt");  
+                
 
             }
 

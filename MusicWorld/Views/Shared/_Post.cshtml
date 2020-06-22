@@ -5,8 +5,8 @@
 <article class="blog-post">
     <h1>
         @Html.ActionLink(Model.Title, "Post", "Blog",
-      new { year = Model.Posted, month = Model.Posted.Month, key = Model.Key },null)
-       
+      new { year = Model.Posted.Year, month = Model.Posted.Month, key = Model.Key },null)
+
     </h1>
 
     <div class="contents">
@@ -15,6 +15,8 @@
 
     <div class="details">
         Posted <span>@Format.AsReadableDate(Model.Posted)</span> by <span>@Model.Author</span>
-
     </div>
+   
+
+
 </article>

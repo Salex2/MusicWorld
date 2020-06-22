@@ -201,7 +201,7 @@ header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url(hero.jpg);
     background-size: cover;
     background-position: center;
-    height: 150vh;
+    height: 170vh;
 }
 
 .hero-text-box {
@@ -336,7 +336,13 @@ footer p {
     display: block;
     float: left;
     margin: 1% 0 1% 1.6%;
-    width: 12%;
+    width: 18%;
+}
+.dlt {
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 15px;
+    margin-top: 0;
 }
 
 .contact-form {
