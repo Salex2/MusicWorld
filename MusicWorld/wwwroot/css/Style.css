@@ -91,6 +91,7 @@ h1 {
     letter-spacing: 1px;
 }
 
+
 h2 {
     font-size: 180%;
     word-spacing: 2px;
@@ -216,7 +217,8 @@ header {
     height: 100px;
     width: auto;
     float: left;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-left:15px;
 }
 
 .main-nav {
@@ -250,13 +252,19 @@ header {
 /*-------------------------------------- */
 /*FOOTER*/
 /*-------------------------------------- */
+.ftr {
+    text-align: center;
+    margin-left: 480px;
+    color: #beb3b3;
+}
 
-
-footer {
+footer   {
     background-color: #3e3d3b;
     padding: 45px;
     font-size: 80%;
 }
+
+
 
 .footer-nav {
     list-style: none;
@@ -322,11 +330,7 @@ footer {
         color: #e6e2da;
     }
 
-footer p {
-    color: #beb3b3;
-    text-align: center;
-    margin-top: 30px;
-}
+
 
 /*-------------------------------------- */
 /*Blog Form*/

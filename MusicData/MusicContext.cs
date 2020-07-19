@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MusicData.Models;
 
 namespace MusicData
 {
@@ -18,6 +19,8 @@ namespace MusicData
         }
          
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+        public DbSet<Songs> Songs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

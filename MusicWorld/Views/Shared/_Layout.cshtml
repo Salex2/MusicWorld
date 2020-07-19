@@ -7,15 +7,17 @@
     <link rel="stylesheet" type="text/css" href="~/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="~/css/grid.css">
     <link rel="stylesheet" type="text/css" href="~/css/Style.css">
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+   
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet" type="text/css">
     <title>MusicWorld</title>
 
 </head>
 <body>
-    <header>
-        <nav>
+    <header >
+        <nav >
             <div class="row">
-                <a href="@Url.Action("Index","Home")">
+                <a class="logo" href="@Url.Action("Index","Home")">
                     <img src="~/img/logo.png" alt="Music logo" class="logo">      
                 </a>
                 <ul class="main-nav">
@@ -26,6 +28,7 @@
                         <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@
                         <li> <a href=" ">Artists</a></li>
                         <li> <a href=" ">Shop</a></li>
+                        <li> <a href=" ">PlayLlist</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
                         <li>
                             <a href="@Url.Action("Logout","Account")" title="LogOut">Logout </a>
@@ -37,7 +40,7 @@
                         <li> <a href=" ">Artists</a></li>
                         <li> <a href=" ">Shop</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
-                        <li><a href="@Url.Action("Register","Account")" title="Read our Blog">Register</a></li>
+                        <li><a href="@Url.Action("Register","Account")" title="Sign Up">Register</a></li>
                         <li><a href="@Url.Action("Login","Account")" title="Login">Login</a></li>
                     }
 
@@ -48,59 +51,9 @@
         @RenderBody()
     </header>
 
-    <section class="section-features">
-        @if (IsSectionDefined("header"))
-        {
-            @RenderSection("header", false)
-        }
-        else
-        {
-            <div class="row">
+    
 
-                <h2>Get good music &amp; Get best music</h2>
-                <p class="long-copy">
-                    Yoasdasdsaaaaaaaaaaaaaaaa a sdas dasd as dasd asdas das das dsaas 
-                </p>
-            </div>
-
-            <div class="row">
-                <div class="col span-1-of-4 box">
-                    <ion-icon name="heart icon-big"></ion-icon>
-                    <h3>Fisrt title</h3>
-                    <p>
-                        This is a looong looasdaos fsjdvansdvsdvjadnadfkjvadfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
-                    </p>
-                </div>
-
-                <div class="col span-1-of-4 box">
-                    <ion-icon name="caret-forward-circle-outline icon-big"></ion-icon>
-                    <h3>Fisrt title</h3>
-                    <p>
-                        This is a looong looasdaos
-                </div>
-
-                <div class="col span-1-of-4 box">
-                    <ion-icon name="musical-notes icon-big"></ion-icon>
-
-                    <h3>Fisrt title</h3>
-                    <p>
-                        This is a looong looasdaos fsjdvdfjbvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
-                    </p>
-                </div>
-
-                <div class="col span-1-of-4 box">
-                    <ion-icon name="color-palette-outline icon-big"></ion-icon>
-                    <h3>Fisrt title</h3>
-                    <p>
-                        This is a looong looasdaos fsjdvansdvsdvdfa sdnfsadkjnf as kdjnasdk jgnasdkj naskjgn
-                    </p>
-                </div>
-                
-            </div>
-        }
-        </section>
-
-    <footer>
+    <footer >
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
@@ -119,7 +72,7 @@
             </div>
         </div>
         <div class="row">
-            <p>
+            <p class="ftr" >
                 Copyright &copy; @DateTime.Now.Year by Alex . All rights reserved.
             </p>
         </div>
