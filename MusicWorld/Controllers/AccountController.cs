@@ -82,7 +82,7 @@ namespace MusicWorld.Controllers
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
                                          model.RememberMe, false);
 
-                if (result.Succeeded) //check if the user is created
+                if (result.Succeeded) 
                 {
                     
                     return RedirectToAction("Index", "Home");
