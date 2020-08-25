@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicWorld.Models
 {
+
     public class ProductViewModel
     {
         [Required]
@@ -21,5 +22,9 @@ namespace MusicWorld.Models
 
         [Required]
         public decimal Value { get; set; }
+
+        public int Id { get; set; }
+
+        
     }
 }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MusicData\MusicData.csproj" />
+    <ProjectReference Include="..\MusicWorld\MusicWorld.csproj" />
   </ItemGroup>
 
 </Project>

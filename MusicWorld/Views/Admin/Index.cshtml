@@ -1,0 +1,34 @@
+﻿
+<div id="app">
+
+   
+    <button v-on:click="getProducts">Get Products</button>
+    
+
+    <div>
+        <p v-for="(product, index) in products">
+            @*creates product object and it gonna be equal to a single item from products array*@
+            {{product.id}} - {{product.name}} - {{product.description}}
+            <button  @@click="editProduct(product, index)">Edit</button>
+            <button @@click="deleteProduct(product.id, index)">Remove</button>
+            
+        </p>
+    </div>
+
+    <div>
+        @*here we create the form for posting a product*@
+        <input v-model="productModel.name" />
+        <input v-model="productModel.description" />
+        <input v-model="productModel.value" />
+        <button @@click="createProduct" v-if="!productModel.id">Create Product</button>
+        <button @@click="updateProduct" v-else>Update Product</button>
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> @*axios for HTTPClient*@
+<script src="~/js/main.js"></script>
+
+

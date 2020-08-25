@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicData;
 using MusicWorld.Models;
-
+using MusicWorld.Services;
 
 namespace MusicWorld
 {
@@ -32,6 +32,8 @@ namespace MusicWorld
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<FormattingService>();
+
+            
 
             services.AddTransient<FeatureToggle>(x => new FeatureToggle()
             {
@@ -53,6 +55,8 @@ namespace MusicWorld
                 options.UseSqlServer(connectionString);
 
             });
+
+           
 
 
 

@@ -1,4 +1,18 @@
-﻿@model IEnumerable<MusicWorld.Models.ProductViewModel>
+﻿@model IEnumerable<MusicWorld.Models.Product>
+
 @{
     Layout = "_Layout";
 }
+
+
+<div>
+    @{ 
+        foreach(var product in Model)
+        {
+            <p>
+                @product.Name - @product.Description - $@product.Value
+            </p>
+        }
+    }
+</div>
+
