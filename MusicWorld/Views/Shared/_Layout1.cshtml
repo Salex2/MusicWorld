@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Music World</title>
+    <link href="~/lib/bulma-0.9.0/css/bulma.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    <a href="@Url.Action("Index","Admin")">Admin</a>
+   
+
+    <partial name="_CookieConsentPartial" />
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    @RenderSection("Scripts",required: false)
+</body>
+</html>

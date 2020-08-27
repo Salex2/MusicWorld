@@ -66,8 +66,7 @@ namespace MusicWorld.Services
            _db.Products.ToList().Select(x => new Product
            {
                Id = x.Id,
-               Name = x.Name,
-               Description = x.Description,
+               Name = x.Name,  
                Value = x.Value
             });
 

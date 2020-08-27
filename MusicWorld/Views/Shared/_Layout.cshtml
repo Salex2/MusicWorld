@@ -4,11 +4,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <link rel="stylesheet" type="text/css" href="~/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="~/css/grid.css">
+    <link href="~/lib/bulma-0.9.0/css/bulma.css" rel="stylesheet" />
+    <link href="~/lib/bulma-0.9.0/css/bulma.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/Style.css">
+
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/js/main.js"></script>
+
 
 
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet" type="text/css">
@@ -29,7 +34,7 @@
                     {
                         <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@
                         <li> <a href=" ">Artists</a></li>
-                        <li> <a href="@Url.Action("Index","Admin")">Shop</a></li>
+                        
                         <li> <a href=" ">PlayLlist</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
                         <li>
@@ -40,7 +45,7 @@
                     else
                     {
                         <li> <a href=" ">Artists</a></li>
-                        <li> <a href="@Url.Action("Index","Product")">Shop</a></li>
+                       
                         <li> <a href="@Url.Action("Index","Admin")">Admin</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
                         <li><a href="@Url.Action("Register","Account")" title="Sign Up">Register</a></li>
