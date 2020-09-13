@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MusicWorld.Models.Product>
+﻿@model IEnumerable<MusicWorld.Models.ProductViewModel>
+@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
 
 @{
     Layout = "_Layout";
@@ -7,11 +8,13 @@
 
 <div>
     @{ 
-        foreach(var product in Model)
+        foreach (var product in Model)
         {
-            <p>
-                @product.Name - @product.Description - $@product.Value
-            </p>
+            <a asp-controller="Product" asp-action="Detail" asp-route-name="@product.Name.Replace(" ","-")">
+                @product.Name - @product.Description - @product.Value
+            </a>
+            <br />
+            
         }
     }
 </div>

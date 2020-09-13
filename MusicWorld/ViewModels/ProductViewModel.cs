@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicWorld.Models.Products;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,10 +22,15 @@ namespace MusicWorld.Models
         public string Description { get; set; }
 
         [Required]
-        public decimal Value { get; set; }
+        public string Value { get; set; }
 
         public int Id { get; set; }
+        public IEnumerable<StockViewModel> Stock { get; set; }
+
+        public string ProductSessionId { get; set; }
 
         
+
+
     }
 }

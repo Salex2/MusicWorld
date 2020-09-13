@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicData;
+using MusicData.Models;
 using MusicWorld.Models;
 using MusicWorld.Services;
 
@@ -32,8 +33,9 @@ namespace MusicWorld
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<FormattingService>();
+            services.AddTransient<IProduct, UserProductService>();
 
-            
+
 
             services.AddTransient<FeatureToggle>(x => new FeatureToggle()
             {
@@ -68,7 +70,12 @@ namespace MusicWorld
                 options.Password.RequiredLength = 7;   // override de default rules for Password prop
             }).AddEntityFrameworkStores<MusicContext>();
 
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "Cart";
+                options.Cookie.MaxAge = TimeSpan.FromDays(365);
 
+            });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -89,6 +96,7 @@ namespace MusicWorld
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

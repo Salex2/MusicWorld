@@ -18,6 +18,11 @@ namespace MusicWorld.Services
             _db = db;
         }
 
+        
+
+
+        //product Create,delete,update, getAllProducts,GetProduct
+
         public async Task<Response> Create(Request request)
         {
             var product = new Product
@@ -62,6 +67,8 @@ namespace MusicWorld.Services
             
         }
 
+        
+
         public IEnumerable<Product> GetAllProducts() =>
            _db.Products.ToList().Select(x => new Product
            {
@@ -105,6 +112,9 @@ namespace MusicWorld.Services
             public decimal Value { get; set;  }
         
         }
+
+
+
 
        
     }

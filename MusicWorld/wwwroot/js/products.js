@@ -1,56 +1,6 @@
-﻿Vue.component('product-manager', {
-    template:` <div>
-            <div v-if="!editing">
-                <button class="button" @="newProduct">Add new product</button>
-                <table class="table">
-                    <tr>
-                        <th>Id</th>
-                        <th>Product</th>
-                        <th>Value</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr v-for="(product, index) in products">
-                        <td>{{product.id}}</td>
-                        <td>{{product.name}}</td>
-                        <td>{{product.value}}</td>
-                        <td><a @click="editProduct(product.id, index)">Edit</a></td>
-                        <td><a @click="deleteProduct(product.id, index)">Remove</a></td>
-                    </tr>
-                </table>
-                
-            </div>
-
-            <div v-else> @**daca editezi e afisat div-ul asta altfel cel de suss *@
-                <div class="field">
-                    <label class="label">Product Name</label>
-                    <div class="control">
-                        <input class="input" v-model="productModel.name" />
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Product Description</label>
-                    <div class="control">
-                        <input class="input" v-model="productModel.description" />
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Value</label>
-                    <div class="control">
-                        <input class="input" v-model="productModel.value" />
-                    </div>
-                </div>
-
-
-                <button class="button is-success" @click="createProduct" v-if="!productModel.id">Create Product</button>
-                <button class="button is-warning" @click="updateProduct" v-else>Update Product</button>
-                <button class="button" @click="cancel">Cancel</button>
-            </div>
-           </div> `,
-    data() {  //data property: all the objects properties,variables within the Vue framework that is gonna look at and work its magic on
-        return {
+﻿var app = new Vue({  //vue object with options
+    el: '#app',
+     data: {
             editing: false,
             loading: false,
             objectIndex: 0,
@@ -61,8 +11,6 @@
                 value: 1.99
             },
             products: []  //here we store our products
-        }
-      
     },
     mounted() {
         this.getProducts();
@@ -90,7 +38,7 @@
         },
         getProducts() {
             this.loading = true;
-            axios.get('/Admin/products')  //where axios points to
+            axios.get('/Admin/products')
                 .then(res => {
                     console.log(res);
                     this.products = res.data;
@@ -164,4 +112,6 @@
 
 
     }
+
 });
+
