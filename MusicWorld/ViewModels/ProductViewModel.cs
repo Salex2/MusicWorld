@@ -1,4 +1,7 @@
-﻿using MusicWorld.Models.Products;
+﻿using MusicData.Models;
+using MusicWorld.Models.Products;
+using MusicWorld.Services;
+using MusicWorld.Services.Cart;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,7 +32,16 @@ namespace MusicWorld.Models
 
         public string ProductSessionId { get; set; }
 
+        public CartViewModel CartViewModel { get; set; }
         
+       
+
+        
+        
+        
+        
+
+
 
 
     }

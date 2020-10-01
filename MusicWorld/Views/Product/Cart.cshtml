@@ -1,0 +1,13 @@
+﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@model MusicWorld.Models.CartViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div>
+    <p>@Model.Name</p>
+    <p>@Model.Value</p>
+    <p>@Model.Qty</p>
+    <p>@Model.StockId</p>
+</div>

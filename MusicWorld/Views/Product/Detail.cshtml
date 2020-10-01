@@ -1,27 +1,28 @@
-﻿@model MusicWorld.Models.ProductViewModel
+﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@model MusicWorld.Models.ProductViewModel
 
-@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
 
 @{
-    Layout = "_Layout";
+    Layout = "_AdminLayout";
 }
-
 
 <div>
     <p>@Model.Name</p>
     <p>@Model.Description</p>
     <p>@Model.Value</p>
     <div>
-        <form asp-action="Detail" asp-controller="Product" method="post">
+        <form method="post" >
+
             <label>Stock</label>
-            <select asp-for="ProductSessionId">
+            <select asp-for="CartViewModel.StockId">
                 @foreach (var s in Model.Stock)
                 {
-                    <option value="@s.Id">@s.Description</option>
+                    <option value="@s.Id"> @s.Description </option>
                 }
             </select>
+            <label>Qty</label>
+            <input asp-for="CartViewModel.Qty" />
             <button type="submit">Submit</button>
-            </form>
-        
+        </form>
     </div>
 </div>

@@ -2,19 +2,19 @@
 @addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
 
 @{
-    Layout = "_Layout";
+    Layout = "_AdminLayout";
 }
 
 
 <div>
-    @{ 
+    @{
         foreach (var product in Model)
         {
             <a asp-controller="Product" asp-action="Detail" asp-route-name="@product.Name.Replace(" ","-")">
                 @product.Name - @product.Description - @product.Value
             </a>
             <br />
-            
+
         }
     }
 </div>

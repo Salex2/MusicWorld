@@ -8,26 +8,32 @@ using MusicData;
 using MusicData.Models;
 using MusicWorld.Models;
 using MusicWorld.Services;
+using MusicWorld.Services.Cart;
 
 namespace MusicWorld.Controllers
 {
     [Route("Product")]
-    public class ProductController : Controller
+    public class ProductController : Controller 
     {
-        [BindProperty]
-        public ProductViewModel ProductTest { get; set; }
 
-        
 
         private readonly MusicContext _db;
         private readonly IProduct _product;
+        [BindProperty]
+        public ProductViewModel Product { get; set; }
+        [BindProperty]
+        public CartViewModel CartViewModel { get; set; }
+       
 
         public ProductController(MusicContext db,IProduct product)
         {
+           
             _db = db;
-            _product = product; 
+            _product = product;
+            
         }
 
+        //All Products
         [Route("")]
         public IActionResult Index()
         {
@@ -36,34 +42,43 @@ namespace MusicWorld.Controllers
             return View(products);
         }
 
+        //Detail Product
         [HttpGet]
         [Route("detail/{name}")]
         public IActionResult Detail(string name)
         {
            
-            var product = _product.GetProduct(name);
-            if (product == null)
+             Product = _product.GetProduct(name);
+            if (Product == null)
                 return RedirectToAction("Index", "Product");
             else
 
-            return View(product);
+            return View(Product); 
         }
 
+
+        //Add to Cart 
         [HttpPost]
         [Route("detail/{name}")]
         public IActionResult Detail()
         {
+            new AddToCart(HttpContext.Session).Add(CartViewModel);
 
-            var current_id = HttpContext.Session.GetString("id");
-            HttpContext.Session.SetString("id", ProductTest.ProductSessionId);
-            
+            return RedirectToAction("Cart", "Product");
 
-            return RedirectToAction("Index", "Product");
         }
 
 
+        //Cart show detail
+        [Route("Cart")]
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            var Cart = new GetCart(HttpContext.Session, _db).Get();
 
-
+            return View(Cart);
+        }
+      
 
 
     }

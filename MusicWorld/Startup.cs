@@ -9,13 +9,16 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MusicData;
 using MusicData.Models;
 using MusicWorld.Models;
 using MusicWorld.Services;
+using MusicWorld.Services.Cart;
 
 namespace MusicWorld
 {
@@ -32,8 +35,17 @@ namespace MusicWorld
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+
             services.AddTransient<FormattingService>();
             services.AddTransient<IProduct, UserProductService>();
+            
 
 
 
@@ -42,13 +54,7 @@ namespace MusicWorld
                 DevelopersExceptions = _config.GetValue<bool>("FeatureToggles:DeveloperExceptions")
 
             });
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
+           
 
             services.AddDbContextPool<MusicContext>(options =>
             {
