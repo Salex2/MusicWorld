@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MusicData.Models
+namespace MusicWorld.ViewModels
 {
-    public class Order
+    public class CustomerInformation
     {
-        public int Id { get; set; }
-        public string OrderRef { get; set; }
-        public string StripeReference { get; set; }
-
+     
         public string FirstName { get; set; }
+      
         public string LastName { get; set; }
+        
         public string Email { get; set; }
+        
         public string PhoneNumber { get; set; }
 
+        
         public string Adress1 { get; set; }
-        public string Adress2 { get; set; }
-        public string City { get; set; }
-        public string PostCode { get; set; }
 
-        public ICollection<OrderProduct> OrderProducts { get; set; }
+        public string Adress2 { get; set; }
+       
+        public string City { get; set; }
+       
+        public string PostCode { get; set; }
     }
 }

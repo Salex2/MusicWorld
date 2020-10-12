@@ -1,0 +1,52 @@
+﻿@model MusicWorld.ViewModels.CustomerViewModel
+@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@{
+    Layout = "_AdminLayout";
+}
+
+<div>
+    <form asp-action="CustomerInformation" asp-controller="Product" method="post" >
+        <div>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+
+        <div>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+
+        <div>
+            <input asp-for="PhoneNumber" />
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+
+        <div>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div>
+            <input asp-for="Adress1" />
+            <span asp-validation-for="Adress1"></span>
+        </div>
+
+        <div>
+            <input asp-for="Adress2" />
+        </div>
+
+        <div>
+            <input asp-for="City" />
+            <span asp-validation-for="City"></span>
+        </div>
+
+        <div>
+            <input asp-for="PostCode" />
+            <span asp-validation-for="PostCode"></span>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+@await Component.InvokeAsync("Cart")
+

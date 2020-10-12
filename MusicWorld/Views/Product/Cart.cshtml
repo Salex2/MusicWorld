@@ -1,13 +1,24 @@
 ﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
-@model MusicWorld.Models.CartViewModel
+@model IEnumerable<MusicWorld.Models.CartViewModel>
+@addTagHelper "*, MusicWorld"
+
 
 @{
     Layout = "_AdminLayout";
 }
 
 <div>
-    <p>@Model.Name</p>
-    <p>@Model.Value</p>
-    <p>@Model.Qty</p>
-    <p>@Model.StockId</p>
+    @foreach (var product in Model)
+    {
+        <p>@product.Name</p>
+        <p>@product.Value</p>
+        <p>@product.Qty</p>
+        <p>@product.StockId</p>
+        <hr />
+    }
+
 </div>
+
+<vc:cart view="Small"></vc:cart>  @*tag helper from our MusicWorld project. We invoke our ViewComponent using HTML syntax for intellisense*@"
+
+

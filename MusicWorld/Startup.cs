@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,7 @@ using MusicData.Models;
 using MusicWorld.Models;
 using MusicWorld.Services;
 using MusicWorld.Services.Cart;
+using Stripe;
 
 namespace MusicWorld
 {
@@ -85,6 +87,9 @@ namespace MusicWorld
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //we registered the secret key on our backend middleware
+            StripeConfiguration.ApiKey = _config.GetSection("Stripe")["SecretKey"];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

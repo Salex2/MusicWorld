@@ -23,23 +23,27 @@ namespace MusicWorld.Services.Cart
         }
 
 
-        public CartViewModel Get()
+        public IEnumerable<CartViewModel> Get()
         {
             var stringObject = _session.GetString("cart");
 
-            var cartProduct = JsonConvert.DeserializeObject<CartProduct>(stringObject);
+            if (string.IsNullOrEmpty(stringObject))
+                return new List<CartViewModel>();
+            
+
+            var cartList = JsonConvert.DeserializeObject<List<CartProduct>>(stringObject);
 
             var response = _db.Stock
                 .Include(x => x.Product)
-                .Where(x => x.Id == cartProduct.StockId)
+                .Where(x => cartList.Any(y => y.StockId == x.Id))
                 .Select(x => new CartViewModel
                 {
                     Name = x.Product.Name,
                     Value = $"$ {x.Product.Value.ToString("N2")}",
                     StockId = x.Id,
-                    Qty = cartProduct.Qty
+                    Qty = cartList.FirstOrDefault(y => y.StockId == x.Id).Qty
                 })
-                .FirstOrDefault();
+                .ToList();
 
             return response;
         }

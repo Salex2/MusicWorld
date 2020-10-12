@@ -11,7 +11,7 @@
     <p>@Model.Description</p>
     <p>@Model.Value</p>
     <div>
-        <form method="post" >
+        <form method="post">
 
             <label>Stock</label>
             <select asp-for="CartViewModel.StockId">
@@ -26,3 +26,4 @@
         </form>
     </div>
 </div>
+@await Component.InvokeAsync("Cart") 

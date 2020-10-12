@@ -26,11 +26,12 @@ namespace MusicWorld.Models
 
         [Required]
         public string Value { get; set; }
-
+        
         public int Id { get; set; }
-        public IEnumerable<StockViewModel> Stock { get; set; }
 
-        public string ProductSessionId { get; set; }
+        public IEnumerable<Product> Product { get; set; }
+         
+        public IEnumerable<StockViewModel> Stock { get; set; }
 
         public CartViewModel CartViewModel { get; set; }
         

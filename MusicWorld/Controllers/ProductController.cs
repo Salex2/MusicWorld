@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using MusicData;
 using MusicData.Models;
 using MusicWorld.Models;
 using MusicWorld.Services;
 using MusicWorld.Services.Cart;
+using MusicWorld.ViewModels;
+using Stripe;
 
 namespace MusicWorld.Controllers
 {
     [Route("Product")]
-    public class ProductController : Controller 
+    public class ProductController : Controller
     {
 
 
@@ -23,15 +27,22 @@ namespace MusicWorld.Controllers
         public ProductViewModel Product { get; set; }
         [BindProperty]
         public CartViewModel CartViewModel { get; set; }
-       
+        [BindProperty]
+        public CustomerViewModel CustomerInfo { get; set; }
 
-        public ProductController(MusicContext db,IProduct product)
+     
+
+
+
+        public ProductController(MusicContext db,IProduct product,IConfiguration config)
         {
-           
+             string PublicKey = config["Stripe:PublicKey"].ToString();
             _db = db;
             _product = product;
             
         }
+
+        
 
         //All Products
         [Route("")]
@@ -74,12 +85,85 @@ namespace MusicWorld.Controllers
         [HttpGet]
         public IActionResult Cart()
         {
-            var Cart = new GetCart(HttpContext.Session, _db).Get();
+            var Cartt = new GetCart(HttpContext.Session, _db).Get();
 
-            return View(Cart);
+            return View(Cartt);
         }
-      
 
+
+
+        //here we get customer information
+        [HttpGet] 
+        [Route("CustomerInformation")]
+        public IActionResult CustomerInformation()
+        {
+            var information = new GetCustomerInformation(HttpContext.Session).Get();
+
+            if (information == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Payment", "Product");
+            }
+            
+        }
+        //Add Customer Information
+        [HttpPost]
+        [Route("CustomerInformation")]
+        public IActionResult CustomerInformation(CustomerViewModel CustomerInfo)
+        {
+           
+
+            new AddCustomerInformation(HttpContext.Session).Add(CustomerInfo);
+
+            return RedirectToAction("Payment", "Product");
+        }
+        
+
+        //STRIPE PAYMENT
+        [HttpGet]
+        [Route("Payment")]
+        public IActionResult Payment()
+        {
+            
+            var information = new GetCustomerInformation(HttpContext.Session).Get();
+
+            if (information == null)
+            {
+                return RedirectToAction("CustomerInformation", "Product");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Payment")]
+        public IActionResult Payment(string stripeEmail,string stripeToken)
+        {
+            //stripe custom classes
+
+            var customers = new CustomerService();
+            var charges = new ChargeService();
+
+            var CartOrder = new GetOrder(HttpContext.Session, _db).Get(); 
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Source = stripeToken
+            });
+
+            var charge = charges.Create(new ChargeCreateOptions
+            {
+                Amount = CartOrder.GetTotalCharge(),
+                Description = "Shop Purchase",
+                Currency = "USD",
+                Customer = customer.Id
+            });
+            return View();
+        }
 
     }
     }
