@@ -41,20 +41,21 @@ namespace MusicWorld.Services
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value
+
             };
         }
 
         
-
+        //product class
         public Product GetProduct(int id)
         {
           return  _db.Products.Where(x => x.Id == id).Select(x => new Product
-            {
+          {
                 Id = x.Id,
                 Name = x.Name,
                 Description = x.Description,
                 Value = x.Value
-            }).FirstOrDefault();
+          }).FirstOrDefault();
         }
 
         public async Task<bool> Delete(int id)
@@ -68,15 +69,15 @@ namespace MusicWorld.Services
         }
 
         
-
+        //product class
         public IEnumerable<Product> GetAllProducts() =>
            _db.Products.ToList().Select(x => new Product
            {
                Id = x.Id,
                Name = x.Name,  
                Value = x.Value
-            });
-
+           });
+        //request class
         public async Task<Response> Update(Request request)
         {
             var product = _db.Products.FirstOrDefault(x => x.Id == request.Id);
@@ -112,7 +113,7 @@ namespace MusicWorld.Services
             public decimal Value { get; set;  }
         
         }
-
+        
 
 
 

@@ -56,11 +56,11 @@ namespace MusicWorld.Controllers
         public async Task<IActionResult>  DeleteProduct(int id) => Ok((await new ProductService(_db).Delete(id)));
 
         [HttpPost("products")]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductService.Request request) => Ok((await new ProductService(_db).Create(request)));
+        public async Task<IActionResult> CreateProduct([FromBody]ProductService.Request request) => Ok((await new ProductService(_db).Create(request)));
         //we use FromBody because we are posting json
 
         [HttpPut("products")]
-        public async Task<IActionResult> UpdateProduct([FromBody] ProductService.Request request) => Ok((await new ProductService(_db).Update(request)));
+        public async Task<IActionResult> UpdateProduct([FromBody]ProductService.Request request) => Ok((await new ProductService(_db).Update(request)));
 
 
 

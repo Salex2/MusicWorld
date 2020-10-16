@@ -17,6 +17,6 @@ namespace MusicWorld.Models
 
         public ICollection<Stock> Stock { get; set; } //Icollection and not List because we just need 
                                                       // to expose the Add and Remove of IEnumerable func.
-        public ICollection<OrderProduct> OrderProducts { get; set; }
+        
     }
 }

@@ -1,12 +1,16 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static MusicWorld.Services.Cart.CreateOrder;
 
 namespace MusicWorld.ViewModels
 {
     public class CustomerInformation
     {
+        public List<Stock> Stocks { get; set;  }
+        public string StripeReference { get; set; }
      
         public string FirstName { get; set; }
       

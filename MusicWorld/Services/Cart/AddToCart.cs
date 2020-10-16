@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Internal;
+using MusicData;
 using MusicData.Models;
 using MusicWorld.Models;
 using Newtonsoft.Json;
@@ -13,15 +14,40 @@ namespace MusicWorld.Services.Cart
     public class AddToCart
     {
         private  ISession _session;
+        private readonly MusicContext _db;
 
-        public AddToCart(ISession session)
+        public AddToCart(ISession session, MusicContext db)
         {
             _session = session;
+            _db = db;
         }
 
 
-        public void Add(CartViewModel request)
+        public async Task<bool> Add(CartViewModel request)
         {
+
+
+
+            //the stock that we want to hold
+            var stockToHold = _db.Stock.Where(x => x.Id == request.StockId).FirstOrDefault();
+
+            if(stockToHold.Quantity < request.Qty)
+            {
+                return false;
+            }
+
+            _db.StocksOnHold.Add(new StocksOnHold
+            {
+                StockId = stockToHold.Id,
+                Qty = request.Qty,
+                ExpireDate = DateTime.Now.AddMinutes(20)
+            });
+
+            // 
+            stockToHold.Quantity = stockToHold.Quantity - request.Qty;
+
+            await _db.SaveChangesAsync();
+
             var cartList = new List<CartProduct>();
             var stringObject = _session.GetString("cart");
 
@@ -53,7 +79,7 @@ namespace MusicWorld.Services.Cart
             //Add the cart to session
             _session.SetString("cart", stringObject);
 
-
+            return true;
         }
     }
 }

@@ -22,23 +22,9 @@ namespace MusicWorld.Services.Cart
             _session = session;
             _db = db;
         }
-        public class Response
-        {
-            public IEnumerable<Product> Products { get; set; }
-            public CustomerInformation CustomerInformation { get; set; }
+  
 
-            public int GetTotalCharge() => Products.Sum(x => x.Value * x.Qty);
-        }
-        public class Product
-        {
-            public int ProductId { get; set; }
-            public int Qty { get; set; }
-            public int StockId { get; set; }
-            public int Value { get; set; }
-        }
-
-
-        public Response Get()
+        public OrderInformation Get()
         {
             var cart = _session.GetString("cart");
             
@@ -47,7 +33,7 @@ namespace MusicWorld.Services.Cart
             var listOfProducts = _db.Stock
                 .Include(x => x.Product)
                 .Where(x => cartList.Any(y => y.StockId == x.Id))
-                .Select(x => new Product
+                .Select(x => new OrderInformation
                 {
                    ProductId = x.ProductId,
                    StockId = x.Id,
@@ -60,7 +46,7 @@ namespace MusicWorld.Services.Cart
             var customerInformation = JsonConvert.DeserializeObject<CustomerInformation>(customerInfoString);
 
 
-            return new Response
+            return new OrderInformation
             {
                 Products = listOfProducts,
                 CustomerInformation = new CustomerInformation

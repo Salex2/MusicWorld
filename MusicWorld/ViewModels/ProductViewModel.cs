@@ -26,8 +26,16 @@ namespace MusicWorld.Models
 
         [Required]
         public string Value { get; set; }
-        
+
+       
+
         public int Id { get; set; }
+
+        public int StockId { get; set; }
+        public int ProductId { get; set; }
+        public int Qty { get; set; }
+
+        public string StockDescription { get; set; }
 
         public IEnumerable<Product> Product { get; set; }
          

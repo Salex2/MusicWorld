@@ -20,26 +20,48 @@ namespace MusicWorld.Services
             _db = db;
         }
 
-        public ProductViewModel GetProduct(string name)
+        public async Task<ProductViewModel> GetProduct(string name)
         {
-           return _db.Products
-            .Include(x => x.Stock)
-            .Where(x => x.Name == name)
-            .Select(x => new ProductViewModel
+
+           var stocksOnHold = _db.StocksOnHold.Where(x => x.ExpireDate < DateTime.Now).ToList();
+
+
+            //here we remove the stock or put it back into our actual Stock db
+            if(stocksOnHold.Count > 0)
             {
-                Name = x.Name,
-                Description = x.Description,
-                Value =  $"$ {x.Value.ToString("N2")}",
+                var stockToReturn = _db.Stock.Where(x => stocksOnHold.Any(y => y.StockId == x.Id)).ToList();
 
-                Stock = x.Stock.Select(y => new StockViewModel
+
+                //restore the quantity
+                foreach(var stock in stockToReturn)
                 {
-                    Id = y.Id,
-                    Description = y.Description,
-                    InStock = y.Quantity > 0
+                    stock.Quantity = stock.Quantity + stocksOnHold.FirstOrDefault(x => x.StockId == stock.Id).Qty;
+                }
 
+                _db.StocksOnHold.RemoveRange(stocksOnHold);
+
+                await _db.SaveChangesAsync();
+            }
+
+
+           return _db.Products
+                .Include(x => x.Stock)
+                .Where(x => x.Name == name)
+                .Select(x => new ProductViewModel
+                {
+                    Name = x.Name,
+                    Description = x.Description,
+                    Value =  $"$ {x.Value.ToString("N2")}",
+
+                    Stock = x.Stock.Select(y => new StockViewModel
+                    {
+                        Id = y.Id,
+                        Description = y.Description,
+                        InStock = y.Quantity > 0
+
+                    })
                 })
-            })
-            .FirstOrDefault();
+                .FirstOrDefault();
         }  
                     
             

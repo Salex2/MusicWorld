@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicData;
 
 namespace MusicData.Migrations
 {
     [DbContext(typeof(MusicContext))]
-    partial class MusicContextModelSnapshot : ModelSnapshot
+    [Migration("20201013110051_OrderStock")]
+    partial class OrderStock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,25 +247,6 @@ namespace MusicData.Migrations
                     b.ToTable("Stock");
                 });
 
-            modelBuilder.Entity("MusicData.Models.StocksOnHold", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("ExpireDate");
-
-                    b.Property<int>("Qty");
-
-                    b.Property<int>("StockId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StockId");
-
-                    b.ToTable("StocksOnHold");
-                });
-
             modelBuilder.Entity("MusicWorld.Models.Post", b =>
                 {
                     b.Property<long>("Id")
@@ -368,14 +351,6 @@ namespace MusicData.Migrations
                     b.HasOne("MusicWorld.Models.Product", "Product")
                         .WithMany("Stock")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MusicData.Models.StocksOnHold", b =>
-                {
-                    b.HasOne("MusicData.Models.Stock", "Stock")
-                        .WithMany()
-                        .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

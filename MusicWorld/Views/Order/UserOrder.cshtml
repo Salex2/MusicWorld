@@ -1,0 +1,21 @@
+﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@model MusicWorld.ViewModels.OrderInformation
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div>
+    <h1>
+        @Model.OrderRef
+    </h1>
+
+    @foreach (var product in Model.Productss)
+    {
+        <div>
+            @product.Name - @product.Description - @product.Qty - @product.Value
+        </div>
+    }
+
+</div>

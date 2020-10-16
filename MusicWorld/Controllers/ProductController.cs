@@ -56,10 +56,10 @@ namespace MusicWorld.Controllers
         //Detail Product
         [HttpGet]
         [Route("detail/{name}")]
-        public IActionResult Detail(string name)
+        public async Task<IActionResult> Detail(string name)
         {
            
-             Product = _product.GetProduct(name);
+             Product = await _product.GetProduct(name);
             if (Product == null)
                 return RedirectToAction("Index", "Product");
             else
@@ -71,11 +71,18 @@ namespace MusicWorld.Controllers
         //Add to Cart 
         [HttpPost]
         [Route("detail/{name}")]
-        public IActionResult Detail()
+        public async Task<IActionResult> Detail()
         {
-            new AddToCart(HttpContext.Session).Add(CartViewModel);
+            var stockAdded = await new AddToCart(HttpContext.Session,_db).Add(CartViewModel);
 
-            return RedirectToAction("Cart", "Product");
+            if (stockAdded)
+                return RedirectToAction("Cart", "Product");
+            else
+                //TODO add a warning
+                return View();
+
+            
+
 
         }
 
@@ -105,7 +112,7 @@ namespace MusicWorld.Controllers
             }
             else
             {
-                return RedirectToAction("Payment", "Product");
+                return RedirectToAction("Payment", "Order");
             }
             
         }
@@ -118,52 +125,10 @@ namespace MusicWorld.Controllers
 
             new AddCustomerInformation(HttpContext.Session).Add(CustomerInfo);
 
-            return RedirectToAction("Payment", "Product");
+            return RedirectToAction("Payment", "Order");
         }
         
 
-        //STRIPE PAYMENT
-        [HttpGet]
-        [Route("Payment")]
-        public IActionResult Payment()
-        {
-            
-            var information = new GetCustomerInformation(HttpContext.Session).Get();
-
-            if (information == null)
-            {
-                return RedirectToAction("CustomerInformation", "Product");
-            }
-
-            return View();
-        }
-
-        [HttpPost]
-        [Route("Payment")]
-        public IActionResult Payment(string stripeEmail,string stripeToken)
-        {
-            //stripe custom classes
-
-            var customers = new CustomerService();
-            var charges = new ChargeService();
-
-            var CartOrder = new GetOrder(HttpContext.Session, _db).Get(); 
-
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                Source = stripeToken
-            });
-
-            var charge = charges.Create(new ChargeCreateOptions
-            {
-                Amount = CartOrder.GetTotalCharge(),
-                Description = "Shop Purchase",
-                Currency = "USD",
-                Customer = customer.Id
-            });
-            return View();
-        }
 
     }
     }
