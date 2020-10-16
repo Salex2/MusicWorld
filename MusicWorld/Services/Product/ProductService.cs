@@ -23,38 +23,38 @@ namespace MusicWorld.Services
 
         //product Create,delete,update, getAllProducts,GetProduct
 
-        public async Task<Response> Create(Request request)
+        public async Task<ProductViewModel> Create(ProductViewModel request)
         {
             var product = new Product
             {
                 Name = request.Name,
                 Description = request.Description,
-                Value = request.Value
+                Value = request.Valuee
             };
             _db.Products.Add(product);
 
             await _db.SaveChangesAsync();
 
-            return new Response
+            return new ProductViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Value = product.Value
+                Valuee = product.Value
 
             };
         }
 
         
         //product class
-        public Product GetProduct(int id)
+        public ProductViewModel GetProduct(int id)
         {
-          return  _db.Products.Where(x => x.Id == id).Select(x => new Product
+          return  _db.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
           {
                 Id = x.Id,
                 Name = x.Name,
                 Description = x.Description,
-                Value = x.Value
+                Valuee = x.Value
           }).FirstOrDefault();
         }
 
@@ -70,51 +70,36 @@ namespace MusicWorld.Services
 
         
         //product class
-        public IEnumerable<Product> GetAllProducts() =>
-           _db.Products.ToList().Select(x => new Product
+        public IEnumerable<ProductViewModel> GetAllProducts() =>
+           _db.Products.ToList().Select(x => new ProductViewModel
            {
                Id = x.Id,
                Name = x.Name,  
-               Value = x.Value
+               Valuee = x.Value
            });
         //request class
-        public async Task<Response> Update(Request request)
+        public async Task<ProductViewModel> Update(ProductViewModel request)
         {
             var product = _db.Products.FirstOrDefault(x => x.Id == request.Id);
 
             product.Name = request.Name;
             product.Description = request.Description;
-            product.Value = request.Value;
+            product.Value = request.Valuee;
 
 
             await _db.SaveChangesAsync();
-            return new Response
+            return new ProductViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Value = product.Value
+                Valuee = product.Value
             };
         }
 
-        public class Request
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public decimal Value { get; set;   }
-        }
-
-        public class Response
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public decimal Value { get; set;  }
+       
         
-        }
         
-
 
 
        

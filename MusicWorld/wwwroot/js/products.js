@@ -8,7 +8,7 @@
                 id: 0,
                 name: "Product Name",
                 description: "Product Description",
-                value: 1.99
+                valuee: 1.99
             },
             products: []  //here we store our products
     },
@@ -26,7 +26,7 @@
                         id: product.id,
                         name: product.name,
                         description: product.description,
-                        value: product.value,
+                        valuee: product.value,
                     };
                 })
                 .catch(err => {

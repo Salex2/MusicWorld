@@ -27,7 +27,7 @@ namespace MusicWorld.Models
         [Required]
         public string Value { get; set; }
 
-       
+         public decimal Valuee { get; set; }
 
         public int Id { get; set; }
 
