@@ -16,6 +16,13 @@
   }
 }
 
+
+.bground {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url(hero.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 170vh;
+}
 .delete, .modal-close, .button, .file, .breadcrumb, .pagination-previous,
 .pagination-next,
 .pagination-link,
@@ -267,6 +274,11 @@ h6 {
   font-weight: normal;
 }
 
+h3 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 ul {
   list-style: none;
 }
@@ -352,10 +364,15 @@ pre {
 }
 
 body {
-  color: #4a4a4a;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1.5;
+    background-image: url(hero.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 170vh;
+    color: #4a4a4a;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+    
 }
 
 a {
@@ -1852,10 +1869,11 @@ fieldset[disabled] .button {
 }
 
 .container {
-  flex-grow: 1;
-  margin: 0 auto;
-  position: relative;
-  width: auto;
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
+    
 }
 
 .container.is-fluid {

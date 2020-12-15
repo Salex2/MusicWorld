@@ -9,6 +9,8 @@ namespace MusicWorld.ViewModels
 {
     public class CustomerInformation
     {
+
+        public string SessionId { get; set; }
         public List<Stock> Stocks { get; set;  }
         public string StripeReference { get; set; }
      

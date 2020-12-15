@@ -15,3 +15,5 @@ namespace MusicWorld.Models.Products
         public bool InStock { get; set; }
     }
 }
+
+

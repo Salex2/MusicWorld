@@ -1,0 +1,75 @@
+﻿@model MusicWorld.ViewModels.EditRoleViewModel
+@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@{
+    Layout = "_Layout";
+}
+
+
+<section class="section-form">
+
+    <h2>Edit Role</h2>
+
+    <div class="row ">
+        <form asp-action="EditRole" asp-controller="Administration" class="contact-form" method="post">
+            <div asp-validation-summary="All" class="input-validation-error"></div>
+            <input hidden asp-for="Id" />
+            <div class="row">
+                <div class="latime">
+                    <label asp-for="Id"></label>
+                </div>
+                <div class="col span-2-of-3">
+
+                    <input asp-for="Id" disabled> @*users aren`t allowed to modify the Id*@
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="latime">
+                    <label asp-for="RoleName"></label>
+                </div>
+                <div class="col span-2-of-3">
+
+                    <textarea asp-for="RoleName"></textarea>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="latime">
+                    <label>&nbsp;</label>
+                </div>
+                <div class="col span-2-of-3">
+                    <input type="submit" value="Update">
+                    <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
+
+                </div>
+            </div>
+
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">
+                    <h3>Users in this role </h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Users.Any())
+                    {
+                        foreach(var user in Model.Users)
+                        {
+                            <h5 class="card-title" >@user</h5>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="card-title">None at the moment</h5>
+                    }
+                </div>
+                <div class="card-footer"> @*we need the id of the role to add or remove a user; we use querry string param*@
+                    <a asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id"
+                    class="btn btn-primary" style="width:auto">Add or Remove Users</a>
+                    
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</section>

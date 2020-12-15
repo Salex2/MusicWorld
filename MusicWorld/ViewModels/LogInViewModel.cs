@@ -8,7 +8,7 @@ namespace MusicWorld.Models
 {
     public class LogInViewModel
     {
-        [Required]
+        
         [EmailAddress]
         public string Email { get; set; }
 
@@ -18,6 +18,9 @@ namespace MusicWorld.Models
 
         [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
+
+        [Required]
+        public string UserName { get; set; }
 
     }
 }

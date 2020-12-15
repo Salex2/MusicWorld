@@ -19,7 +19,8 @@ namespace MusicWorld.Services
             _db = db;
         }
 
-        public async Task<Response> Create(Request request)
+        //respone request
+        public async Task<StockViewModel> Create(StockViewModel request)
         {
             var stock = new Stock
             {
@@ -33,7 +34,7 @@ namespace MusicWorld.Services
            await _db.SaveChangesAsync();
 
 
-            return new Response
+            return new StockViewModel
             {
                 Id = stock.Id,
                 Description = stock.Description,
@@ -51,7 +52,9 @@ namespace MusicWorld.Services
             return true;
         }
 
-        public async Task<Response> UpdateStock(Request request)
+
+        //response request
+        public async Task<StockViewModel> UpdateStock(StockViewModel request)
         {
             var stocks = new List<Stock>();
 
@@ -70,11 +73,13 @@ namespace MusicWorld.Services
             _db.Stock.UpdateRange(stocks);
             await _db.SaveChangesAsync();
 
-            return new Response
+            return new StockViewModel
             {
                 Stock = request.Stock
             };
         }
+
+
 
         public IEnumerable<ProductViewModel> GetStock()
         {
@@ -99,22 +104,7 @@ namespace MusicWorld.Services
 
 
 
-        public class Request
-        {
-            public IEnumerable<StockViewModel> Stock { get; set; }
-            public string Description { get; set; }
-            public int Quantity { get; set; }
-            public int ProductId { get; set; }
-            public int Id { get; set; }
-        }
-
-        public class Response
-        {
-            public IEnumerable<StockViewModel> Stock { get; set; }
-            public string Description { get; set; }
-            public int Quantity { get; set; }
-            public int Id { get; set; }
-        }
+        
 
         
     }

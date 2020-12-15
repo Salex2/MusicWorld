@@ -10,7 +10,7 @@
     <link href="~/lib/bulma-0.9.0/css/bulma.css" rel="stylesheet" />
     <link href="~/lib/bulma-0.9.0/css/bulma.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/Style.css">
-
+    <script src="~/lib/jquerry/jquery.js"></script>
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/js/main.js"></script>
 
@@ -34,23 +34,29 @@
                     {
                         <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@
                         <li> <a href=" ">Artists</a></li>
-                        
-                        <li> <a href=" ">PlayLlist</a></li>
-                        <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
-                        <li>
-                            <a href="@Url.Action("Logout","Account")" title="LogOut">Logout </a>
-                        </li>
 
-                    }
-                    else
-                    {
-                        <li> <a href=" ">Artists</a></li>
-                       
-                        <li> <a href="@Url.Action("Index","Admin")">Admin</a></li>
+                        <li> <a href=" ">Playlist</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
-                        <li><a href="@Url.Action("Register","Account")" title="Sign Up">Register</a></li>
-                        <li><a href="@Url.Action("Login","Account")" title="Login">Login</a></li>
-                    }
+                        <li> <a href="@Url.Action("Index","Product")">Shop</a></li>
+                       
+                            @if (User.IsInRole("Admin"))
+                            {
+                            <li> <a href="@Url.Action("ListRoles","Administration")">Manage Roles</a></li>
+                            }
+
+                            <li>   <a href="@Url.Action("Logout","Account")" title="LogOut">Logout </a></li>                            
+
+
+                        }
+                        else
+                        {
+                            <li> <a href=" ">Artists</a></li>
+
+                            <li> <a href="@Url.Action("Index","Product")">Shop</a></li>
+                            <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
+                            <li><a href="@Url.Action("Register","Account")" title="Sign Up">Register</a></li>
+                            <li><a href="@Url.Action("Login","Account")" title="Login">Login</a></li>
+                        }
 
                 </ul>
             </div>

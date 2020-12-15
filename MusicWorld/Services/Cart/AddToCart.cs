@@ -26,7 +26,8 @@ namespace MusicWorld.Services.Cart
         public async Task<bool> Add(CartViewModel request)
         {
 
-
+            //when a user adds a new item we update the expiryDate
+            var stockOnHold = _db.StocksOnHold.Where(x => x.SessionId == _session.Id).ToList();
 
             //the stock that we want to hold
             var stockToHold = _db.Stock.Where(x => x.Id == request.StockId).FirstOrDefault();
@@ -39,12 +40,19 @@ namespace MusicWorld.Services.Cart
             _db.StocksOnHold.Add(new StocksOnHold
             {
                 StockId = stockToHold.Id,
+                SessionId = _session.Id,
                 Qty = request.Qty,
                 ExpireDate = DateTime.Now.AddMinutes(20)
             });
 
             // 
             stockToHold.Quantity = stockToHold.Quantity - request.Qty;
+
+            //when a user adds a new item we update the expiryDate
+            foreach (var stock in stockOnHold)
+            {
+                stock.ExpireDate = DateTime.Now.AddMinutes(20);
+            }
 
             await _db.SaveChangesAsync();
 

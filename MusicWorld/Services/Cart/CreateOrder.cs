@@ -26,12 +26,11 @@ namespace MusicWorld.Services.Cart
         public async Task<bool> Create(CustomerInformation request)
         {
             //update the stocks from db
-            var stocksToUpdate = _db.Stock.Where(x => request.Stocks.Any(y => y.StockId == x.Id)).ToList();
+            var stockOnHold = _db.StocksOnHold.Where(x => x.SessionId == request.SessionId).ToList();
 
-            foreach(var stock in stocksToUpdate)
-            {
-                stock.Quantity = stock.Quantity - request.Stocks.FirstOrDefault(x => x.StockId == stock.Id).Qty;
-            }
+            //remove the stock we are holding for this customer
+            _db.StocksOnHold.RemoveRange(stockOnHold); 
+           
 
             var order = new Order
             {

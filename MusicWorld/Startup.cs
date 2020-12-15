@@ -19,6 +19,7 @@ using MusicData;
 using MusicData.Models;
 using MusicWorld.Models;
 using MusicWorld.Services;
+using MusicWorld.Services.Blog;
 using MusicWorld.Services.Cart;
 using Stripe;
 
@@ -47,7 +48,7 @@ namespace MusicWorld
 
             services.AddTransient<FormattingService>();
             services.AddTransient<IProduct, UserProductService>();
-            
+            services.AddTransient<IBlog, BlogService>();
 
 
 
@@ -76,6 +77,9 @@ namespace MusicWorld
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 7;   // override de default rules for Password prop
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
             }).AddEntityFrameworkStores<MusicContext>();
 
             services.AddSession(options =>
@@ -117,7 +121,7 @@ namespace MusicWorld
 
                 routes.MapRoute(
                    name: "blog",
-                   template: "{controller=Blog}/{action=Post}/{year}/{month}/{key}");
+                   template: "{controller=Blog}/{action=Post}/{id}");
             }
               
         );

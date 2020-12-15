@@ -73,7 +73,8 @@ namespace MusicWorld.Controllers
         [Route("detail/{name}")]
         public async Task<IActionResult> Detail()
         {
-            var stockAdded = await new AddToCart(HttpContext.Session,_db).Add(CartViewModel);
+          
+          var stockAdded = await new AddToCart(HttpContext.Session,_db).Add(CartViewModel);
 
             if (stockAdded)
                 return RedirectToAction("Cart", "Product");

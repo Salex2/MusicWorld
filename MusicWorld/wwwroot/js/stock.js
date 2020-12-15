@@ -35,7 +35,7 @@
                     return {
                         id: x.id,
                         description: x.description,
-                        qty: x.qty,
+                        quantity: x.quantity,
                         productId: this.selectedProduct.id
                     };
                 })

@@ -10,6 +10,9 @@ namespace MusicData.Models
     {
         public int Id { get; set; }
 
+        //tell the stock and the person that is holding it 
+        public string SessionId { get; set; }
+
         public int StockId { get; set; }
         public Stock Stock { get; set; }
 

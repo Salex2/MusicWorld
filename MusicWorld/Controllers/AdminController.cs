@@ -16,12 +16,12 @@ namespace MusicWorld.Controllers
     {
 
         private readonly MusicContext _db;
-        
+
 
         public AdminController(MusicContext db)
         {
             _db = db;
-           
+
         }
 
         public IActionResult Index()
@@ -47,20 +47,40 @@ namespace MusicWorld.Controllers
         //PRODUCTS
 
         [HttpGet, Route("products")]
-        public IActionResult GetProducts() => Ok(new ProductService(_db).GetAllProducts());
+        public IActionResult GetProducts()
+        {
+            var products = new ProductService(_db).GetAllProducts();
+
+            return Ok(products);
+
+        }
+
 
         [HttpGet, Route("products/{id}")]
-        public IActionResult GetProduct(int id) => Ok(new ProductService(_db).GetProduct(id));
+        public IActionResult GetProduct(int id)
+        {
+            return Ok(new ProductService(_db).GetProduct(id));
+
+        }
 
         [HttpDelete("products/{id}")]
-        public async Task<IActionResult>  DeleteProduct(int id) => Ok((await new ProductService(_db).Delete(id)));
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            return Ok((await new ProductService(_db).Delete(id)));
+        }
 
         [HttpPost("products")]
-        public async Task<IActionResult> CreateProduct([FromBody]ProductViewModel request) => Ok((await new ProductService(_db).Create(request)));
+        public async Task<IActionResult> CreateProduct([FromBody]ProductViewModel request)
+        {
+            return Ok((await new ProductService(_db).Create(request)));
+        }
         //we use FromBody because we are posting json
 
         [HttpPut("products")]
-        public async Task<IActionResult> UpdateProduct([FromBody]ProductViewModel request) => Ok((await new ProductService(_db).Update(request)));
+        public async Task<IActionResult> UpdateProduct([FromBody]ProductViewModel request)
+        {
+            return Ok((await new ProductService(_db).Update(request)));
+        }
 
 
 
@@ -68,18 +88,30 @@ namespace MusicWorld.Controllers
         //STOCKS
 
         [HttpGet, Route("stocks")]
-        public IActionResult GetStocks() => Ok(new StockService(_db).GetStock());
-
+        public IActionResult GetStocks()
+        {
+            return Ok(new StockService(_db).GetStock());
+        }
+       
         [HttpDelete("stocks/{id}")]
-        public async Task<IActionResult> DeleteStock(int id) => Ok((await new StockService(_db).DeleteStock(id)));
+        public async Task<IActionResult> DeleteStock(int id) 
+        { 
+            return  Ok((await new StockService(_db).DeleteStock(id)));
+        }
 
         [HttpPost("stocks")]
-        public async Task<IActionResult> CreateStock([FromBody] StockService.Request request) => Ok((await new StockService(_db).Create(request)));
-        //we use FromBody because we are posting json
+        public async Task<IActionResult> CreateStock([FromBody] StockViewModel request)
+
+        {
+           return Ok((await new StockService(_db).Create(request)));
+            //we use FromBody because we are posting json
+        }
 
         [HttpPut("stocks")]
-        public async Task<IActionResult> UpdateStock([FromBody] StockService.Request request) => Ok((await new StockService(_db).UpdateStock(request)));
-
+        public async Task<IActionResult> UpdateStock([FromBody] StockViewModel request)
+        {
+           return Ok((await new StockService(_db).UpdateStock(request)));
+        }
     }
         
 

@@ -17,28 +17,8 @@ namespace MusicWorld.Services.Cart
             _session = session;
         }
 
-        public class Response
-        {
-            public string FirstName { get; set; }
 
-            public string LastName { get; set; }
-
-            public string Email { get; set; }
-
-            public string PhoneNumber { get; set; }
-
-
-            public string Adress1 { get; set; }
-
-            public string Adress2 { get; set; }
-
-            public string City { get; set; }
-
-            public string PostCode { get; set; }
-        }
-       
-
-        public Response Get()
+        public CustomerInformation Get()
         {
             var stringObject = _session.GetString("customer");
 
@@ -48,7 +28,7 @@ namespace MusicWorld.Services.Cart
             var customerInformation = JsonConvert.DeserializeObject<CustomerInformation>(stringObject);
 
 
-            return new Response
+            return new CustomerInformation
             {
                 FirstName = customerInformation.FirstName,
                 LastName = customerInformation.LastName,

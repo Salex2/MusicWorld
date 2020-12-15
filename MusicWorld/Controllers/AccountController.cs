@@ -42,7 +42,7 @@ namespace MusicWorld.Controllers
             {
                 var user = new IdentityUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email
                 };
 
@@ -79,7 +79,7 @@ namespace MusicWorld.Controllers
             if (ModelState.IsValid)
             {
 
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password,
                                          model.RememberMe, false);
 
                 if (result.Succeeded) 
