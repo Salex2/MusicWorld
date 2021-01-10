@@ -50,6 +50,10 @@ namespace MusicWorld.Controllers
 
                 if (result.Succeeded) //check if the user is created
                 {
+                    if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
                   await  signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

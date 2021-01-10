@@ -34,29 +34,26 @@
                     {
                         <li> <a href=" ">Welcome: @User.Identity.Name </a></li> @*TO DO ONclick go to personal profile*@
                         <li> <a href=" ">Artists</a></li>
-
                         <li> <a href=" ">Playlist</a></li>
                         <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
                         <li> <a href="@Url.Action("Index","Product")">Shop</a></li>
-                       
-                            @if (User.IsInRole("Admin"))
-                            {
-                            <li> <a href="@Url.Action("ListRoles","Administration")">Manage Roles</a></li>
-                            }
-
-                            <li>   <a href="@Url.Action("Logout","Account")" title="LogOut">Logout </a></li>                            
-
-
-                        }
-                        else
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <li> <a href=" ">Artists</a></li>
-
-                            <li> <a href="@Url.Action("Index","Product")">Shop</a></li>
-                            <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
-                            <li><a href="@Url.Action("Register","Account")" title="Sign Up">Register</a></li>
-                            <li><a href="@Url.Action("Login","Account")" title="Login">Login</a></li>
+                            <li> <a href="@Url.Action("ListUsers","Administration")">Users</a></li>
+                            <li>   <a href="@Url.Action("ListRoles","Administration")">Roles </a></li>
                         }
+                        <li>   <a href="@Url.Action("Logout","Account")" title="LogOut">Logout </a></li>
+                    }
+                    else
+                    {
+                        <li> <a href=" ">Artists</a></li>
+
+                        <li> <a href="@Url.Action("Index","Product")">Shop</a></li>
+                        <li><a href="@Url.Action("Index","Blog")" title="Read our Blog">Blog</a></li>
+                        <li><a href="@Url.Action("Register","Account")" title="Sign Up">Register</a></li>
+                        <li><a href="@Url.Action("Login","Account")" title="Login">Login</a></li>
+                    }
+
 
                 </ul>
             </div>
