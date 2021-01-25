@@ -35,7 +35,7 @@ namespace MusicWorld.Services
 
             await _db.SaveChangesAsync();
 
-            return new ProductViewModel
+            return new ProductViewModel 
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -69,7 +69,7 @@ namespace MusicWorld.Services
         }
 
         
-        //product class
+        //product class; GetAllProducts expression "=>" and not a statement; IEnumerable is kind of a static List  
         public IEnumerable<ProductViewModel> GetAllProducts() =>
            _db.Products.ToList().Select(x => new ProductViewModel
            {
@@ -77,6 +77,7 @@ namespace MusicWorld.Services
                Name = x.Name,  
                Valuee = x.Value
            });
+
         //request class
         public async Task<ProductViewModel> Update(ProductViewModel request)
         {

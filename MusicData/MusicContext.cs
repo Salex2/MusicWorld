@@ -30,6 +30,7 @@ namespace MusicData
         {
             base.OnModelCreating(builder);
             builder.Entity<OrderStock>()  //here i configure a  Composit key : a primary key that consists of 2 ore more primary keys
+                                            //Keys for Stock and Order; Its value is the primary keys of Stock and Order
                 .HasKey(x => new { x.StockId, x.OrderId });
             
             

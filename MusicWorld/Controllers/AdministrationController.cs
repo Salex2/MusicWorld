@@ -16,12 +16,97 @@ namespace MusicWorld.Controllers
         private readonly UserManager<IdentityUser> _userManager; //manage users:create ,delete etc
         private readonly RoleManager<IdentityRole> _roleManager; //manage roles:create, delete etc roles
 
-        
+
 
         public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+        }
+
+
+        //check or uncheck directly a role for the given user"userId" instead of going to EditUsersInRole
+        [HttpGet]
+        [Route("ManageUserRoles")]
+        public async Task<IActionResult> ManageUserRoles(string userId)
+        {
+            //store the user id in viewBag to pass it in the  View
+            ViewBag.userId = userId;
+
+            //using the roleId we retrieve the respective role from DB using RoleManager
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Role with id={userId} cannot be found";
+                return RedirectToAction("Error", "Administration");
+            }
+
+            var model = new List<UserRolesViewModel>();
+
+            foreach(var role in _roleManager.Roles)
+            {
+                var userRolesViewModel = new UserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+
+                if(await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                 {
+                   userRolesViewModel.IsSelected = false;
+                 }
+
+                model.Add(userRolesViewModel);
+                
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Route("ManageUserRoles")]
+        public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model,string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Role with id={userId} cannot be found";
+                return RedirectToAction("Error", "Administration");
+            }
+
+            //retrieve all the roles the user belongs to
+            var roles = await _userManager.GetRolesAsync(user);
+            //removing all those existing userRoles
+            var result = await _userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot remove user existing roles");
+                return View(model);
+            }
+
+
+            //passing the user and the List of selected Roles; selecting only the roles of the bool property
+            result = await _userManager.AddToRolesAsync(user,
+                model.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot add selected roles to user");
+                return View(model);
+            }
+
+
+            return RedirectToAction("EditUser", new { Id = userId });
+
+
         }
 
         [HttpPost]

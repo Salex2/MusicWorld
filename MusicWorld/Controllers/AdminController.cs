@@ -8,18 +8,22 @@ using System.Threading.Tasks;
 using MusicWorld.Services;
 using static MusicWorld.Services.ProductService;
 using MusicWorld.Models.Products;
+using MusicData.Models;
 
 namespace MusicWorld.Controllers
 {
     [Route("[Controller]")]
     public class AdminController : Controller
     {
+        //Controller witch actions for the SHOP ADMIN
+        //Uses ProductService for Admin only actions
 
         private readonly MusicContext _db;
+        private readonly IProduct _product;
 
-
-        public AdminController(MusicContext db)
+        public AdminController(MusicContext db,IProduct product)
         {
+            _product = product;
             _db = db;
 
         }
@@ -49,6 +53,7 @@ namespace MusicWorld.Controllers
         [HttpGet, Route("products")]
         public IActionResult GetProducts()
         {
+            
             var products = new ProductService(_db).GetAllProducts();
 
             return Ok(products);
@@ -73,6 +78,7 @@ namespace MusicWorld.Controllers
         public async Task<IActionResult> CreateProduct([FromBody]ProductViewModel request)
         {
             return Ok((await new ProductService(_db).Create(request)));
+            
         }
         //we use FromBody because we are posting json
 

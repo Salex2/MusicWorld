@@ -20,6 +20,8 @@ namespace MusicWorld.Controllers
     public class ProductController : Controller
     {
 
+        //This controller uses UserProductService wich implements IPRODUCT
+        //Controller for user interaction with the shop
 
         private readonly MusicContext _db;
         private readonly IProduct _product;

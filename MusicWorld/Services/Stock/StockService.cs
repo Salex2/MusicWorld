@@ -12,6 +12,10 @@ namespace MusicWorld.Services
 {
     public class StockService
     {
+
+        // Only admins can use this Service
+        //to do Authorize ROLES ADMIN
+
         private readonly MusicContext _db;
 
         public StockService(MusicContext db)
